@@ -1,0 +1,114 @@
+Tables and Squares tricks
+
+# prerequisites
+Square -> 1 - 50
+Cube -> 1 - 20
+Table -> 1 - 30
+Prime no -> 1 - 200
+
+###################### Squares #####################33
+# Squares from 21 to 30
+pattern
+- start from 20 x 20 = 400, so it is greater than 400
+- start with 4 4 5 5 6 6 7 7 8 8 9
+- 41 84 29 76 25 76
+
+21 -> 441
+22 -> 484
+23 -> 529
+24 -> 576
+25 -> 625
+26 -> 676
+27 -> 729
+28 -> 784
+29 -> 841
+30 -> 900
+
+
+# Squares from 41 to 50
+pattern
+- start from 40 x 40 = 1600, so it is greater than 1600
+- start with 16 17 18 19 20 21 22 23 24 25
+- attach squares of position from last 81 64 49 36 .....
+
+41 -> 1681
+42 -> 1764
+43 -> 1849
+44 -> 1936
+45 -> 2025
+46 -> 2116
+47 -> 2209
+48 -> 2316
+49 -> 2401
+50 -> 2500
+
+
+# Squares from 51 to 60
+pattern
+- start from 50 x 50 = 2500, so it is greater than 2500
+- start with 26 27 28 29 30 31 32 33 34 skip 35 3600
+- attach squares of position from 1 4 9 16.....
+
+51 -> 2601
+52 -> 2704
+53 -> 2809
+54 -> 2916
+55 -> 3025
+56 -> 3136
+57 -> 3249
+58 -> 3364
+59 -> 3481
+60 -> 3600
+
+
+# Squares from 91 to 100
+pattern
+- start from 90 x 90 = 8100, so it is greater than 8100
+- start with 82 84 86 88 90 92 94 96 98 100
+- attach squares of position from last 81 64 49 36 .....
+
+91 -> 8281
+92 -> 8464
+93 -> 8649
+94 -> 8836
+95 -> 9025
+96 -> 9216
+97 -> 9409
+98 -> 9604
+99 -> 9801
+100 -> 10000000
+
+
+############ Tables ###################
+
+take unit digit of rightmost digit table (here 6)
+attach sum of leftmost(here 8) digit table and remaining digits of rightmost digit table(here 6)
+
+take 2 of 12 and attach 16 + 1 before it
+172
+
+86  8   6
+
+86  8   6
+172 16  12
+258 24  18
+344 32  24
+430 40  30
+516 48  36
+602 56  42
+688 64  48
+774 72  54
+860 80  60
+
+################### Square of any number
+
+1) (103)^2
+- check how much is less or more than hundred and difference to original number and attach square of difference behind it 
+
+103 + 3 = 106
+10600 + 09 = 10609
+
+2) (112)^2
+- if square is more than 3 digits then attach 00 to addition of difference and add square of number
+112 + 12 = 124
+12400 + 144 = 12544

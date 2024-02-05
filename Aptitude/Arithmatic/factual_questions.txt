@@ -1,0 +1,12 @@
+1) Find such pairs
+
+    (ab)^2 = xyz
+    (ba)^2 = zyx
+
+    ans -> (12,21), (13,31)
+
+2) (MN)^2 = APPP
+    find M+N+A+P = 16
+    MN = 38
+    APPP = 1444
+ 

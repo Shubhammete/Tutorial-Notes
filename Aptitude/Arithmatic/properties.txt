@@ -1,0 +1,49 @@
+1) 37 table properties
+
+37 x 3 -> 111
+37 x 6 -> 222
+.....
+
+2) (p-1)^2 = y
+    (p)^2 = y+p+(p-1)
+
+13^2 = 169
+14^2 = 169 + 14 + 13 = 196 
+
+3) properties of 9
+
+a) here 8+2 = 10 so add 8 between and 8+1=9 so 1 at last
+    if there are n no of 9's in digit then no of 9's in ans will be (n-1)
+
+    9^2  
+    9^2 = 81
+    99^2 = 9801
+        9_8_0_1
+    999^2 = 998001
+        99_8_00_1
+
+    Q if there are 2020 9's in (9999....999)^2 then 
+    - Total digits of ans 
+        2019(9's) + 2019 (0's) + 2(8,1) = 4040
+    - Digits sum   
+        2019x9 + 2019x0 + 8 + 1   = 2020 x 9
+
+b) cubes of 9 
+
+9^3  here 7+3 = 10 so add 7 between and 7+2=9 so 2 at last
+    if there are n no of 9's in digit then no of 9's in ans will be (n-1)
+    attach original number to end
+
+9^3  
+    9^3 = 729
+    99^3 = 970299
+        9_7_0_2_99
+    999^3 = 997002999
+        99_7_00_2_999
+
+
+Q if there are 2020 9's in (9999....999)^2 then 
+- Total digits of ans 
+    2019(9's) + 2019 (0's) + 2(8,1) = 4040
+- Digits sum   
+    2019x9 + 2019x0 + 8 + 1   = 2020 x 9

@@ -1,0 +1,102 @@
+
+1) .equals vs ==,
+    "==" checks reference also like String a = "aaa" and String b = "aaa"
+    if a and b are pointing to different aaa then it gives false
+    .equals checks only value and not reference
+
+           if(fruit.equals("Mango")){
+               System.out.println("Mango");
+           }else{
+               System.out.println("Other Fruit");
+           }
+
+2) Occurrence
+
+    // check how many times number has occurred
+    while(num>0)
+    {
+         if(num%10 == no) {  // num%10 gives last no
+               count++;
+            }
+         num = num/10;   // num/10 removes last no
+         length--;   // remove in case of num>0
+    }
+
+3) Prime no
+
+    static String checkPrime(int no){
+            int c = 2;
+            // check up to square root
+            while(c*c <= no){
+                if(no%c == 0){
+                    return "Not Prime";
+
+                }
+                c++;
+            }
+            return "Prime";
+        }
+
+4) Reverse Number
+
+    int ans = 0;
+    while(num>0){
+                int rem = num%10;  // gives last no
+                num /=10;          // removes last digit
+                ans = ans*10 + rem;   // start is 0 so only rem is added and then 10 * answer so tenth digit gets set up
+            }
+
+
+5) ArmStrong Number
+
+    // Number whose sum of cube of each digit is equal to original number
+    static boolean checkArmstrongNo(int no) {
+            int sum = 0;
+            int original = no;
+            while(no>0){
+                int rem = no%10;
+                int cube = rem*rem*rem;
+                sum += cube;
+                no /= 10;
+            }
+            if (sum == original){
+                return true;
+            }
+            return false;
+        }
+
+6) Fibonacci Number
+
+    // Series that is sum of first no and second no
+
+    int first =0;
+    int second = 1;
+    int result = 0;
+    for(int i = 2; i<=n;i++){
+        result= first + second;
+        first = second;
+        second = result;
+    }
+
+7) Factorial
+
+    if(num != 0 ){
+    for(int i = num; i>=1; i--){
+            ans *= i;
+        }
+        return ans;
+    }
+
+
+8) Permutation and Combination
+
+    static int nPr(int n,int r){
+        return (fact(n)/fact(n-r));
+        // n!/ (n-r)!
+    }
+
+    static int nCr(int n, int r) {
+        return (fact(n)/(fact(r)*fact(n-r)));
+        // n! / r! * (n-r)!
+    }
+

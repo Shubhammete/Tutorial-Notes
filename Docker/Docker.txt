@@ -1,0 +1,69 @@
+- To pull images from the docker hub 
+	docker pull busybox
+
+- To run the container
+	docker run -it node
+
+- To see the images 
+	docker images
+	
+- To delete the image
+	 docker image rm 3f57d9401f8d
+	 docker image rm (id)
+
+- To inspect docker image
+	docker inspect 3f57d9401f8d
+
+- To remove used images
+	docker image prune 
+
+-  This will remove all images without at least one container associated to them.
+	docker image prune -a
+
+- Docker container
+	docker container -ls // to see all running containers
+	docker ps
+	docker container ls --all // to see all available containers
+	
+
+	CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS                      PORTS     NAMES
+	f550e72d3b9f   busybox   "sh"          4 seconds ago    Exited (0) 2 seconds ago              crazy_roentgen
+	1080b22ff90f   ubuntu    "/bin/bash"   14 seconds ago   Exited (0) 12 seconds ago             zen_galois
+
+	// here random names are given by docker we can also create our custom named container
+	
+	docker run -it --name shubham ubuntu // it directly starts ubuntu command line as i here is interactive and t here is tty i.e. it attaches current terminal to container environment
+	docker run --name shubham ubuntu // it just creates the container
+	
+- To remove docker container
+	docker container rm shubham
+	
+- To delete all exited container
+	docker container prune
+
+- To execute the operations in container from another terminal or outside the environment 
+	docker exec shubham mkdir newDir
+
+- To start the exited container 
+	docker start shubham
+
+- To exit the container
+	docker kill shubham
+
+- To attach terminal to environment  i.e. opens ubuntu terminal in my terminal if shubham is container of ubuntu image
+	docker attach shubham
+
+- To run commands on image
+	docker run -it myfirstimg bash // opens bash
+	docker run -it myfirstimg whoami etc..
+
+- To show logs of container
+	docker container logs (id)
+
+- To build custom image create Dockerfile and then add base image and run command
+	docker build -t myfirstimg .
+	// here name must be lowercase and at last . represnt the present directory -t is tag
+
+
+- TO run server image on port
+	docker run -p 80:80 my_apache_image

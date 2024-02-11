@@ -1,0 +1,102 @@
+
+
+1) declaring string both explicitly and implicitly == and .equals()
+
+            // implicitly declaring have share same object for same string value
+            String a = "Shubh";
+            String b = "Shubh";
+
+            // explicitly declaring have share different  object for same string value
+            String a1 = new String("Shubh");
+            String b1 = new String("Shubh");
+
+            System.out.println(a == b);  // true
+            System.out.println(a1 == b);  // false
+            System.out.println(a1 == b1);  // false
+            System.out.println(a.equals(b));  // true
+            System.out.println(a1.equals(b));  // true
+            System.out.println(a1.equals(b1)); // true
+
+            // Wrapper Class
+            Integer num;
+            num = new Integer(3);
+            System.out.println(num.toString());
+
+2) Operator overloading
+
+            System.out.println('a'+'z');  // char are converted into ASCII values, and they get added up
+            // 219
+            System.out.println("a"+"z");  // creates seperate object az
+            //az
+            System.out.println('a'+3);
+            // 100
+            System.out.println((char)('a'+3));
+            //d
+            System.out.println("a"+3); // int this int is converted into wrapper class and its toString method is used i.e. "a"+"3"
+            //a3
+            System.out.println("a"+'b');
+            // ab
+            System.out.println("Kunal" + new ArrayList<>());
+            // Kunal[]
+            System.out.println("Kunal" + new Integer(22));
+            // Kunal22
+            //System.out.println(new ArrayList<>()+new Integer(23));
+            // inorder to do operation at least one of operand must be string
+            System.out.println(new ArrayList<>() + ""+ new Integer(23));  // this will work coz here we add empty string
+
+3) StringBuilder
+
+                String series = "";
+                for(int i = 0; i< 26;i++){
+                    char c = (char)('a'+i);
+                    series += c;
+                }
+                System.out.println(series);  // will print a-z
+                // problem here is it creates object at each addition like a+0, a+1, a+2.....
+                // so we use StringBuilder
+
+                StringBuilder string = new StringBuilder();
+                for(int i = 0; i< 26; i++){
+                    char ch = (char)('a'+i);
+                    string.append(ch);
+                }
+                System.out.println(string);
+                // convert StringBuilder to string
+                System.out.println(string.toString());
+
+
+4) String methods
+
+            String name = "Shubham Mete";
+            System.out.println(Arrays.toString(name.toCharArray()));
+            System.out.println(Arrays.toString(name.split(" ")));
+
+
+5) PrettyPrinter
+
+                float a = 23.4567f;
+                System.out.printf("The formated number is %.2f",a);
+                System.out.println();
+                System.out.printf("%.3f",Math.PI);
+                System.out.println();
+                System.out.printf("Hey I am %s and I am %s","Shubham","cool");
+
+
+6) Palindrome
+
+            String name = "Nitin";
+                boolean flag = true ;
+                name = name.toLowerCase();
+                for(int i = 0; i<name.length()/2;i++){
+                    char start = name.charAt(i);
+                    char end = name.charAt(name.length() - 1 - i);
+
+                    if(start != end){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    System.out.println("Palindrome");
+                }else{
+                    System.out.println("Not Palindrome");
+                }

@@ -1,0 +1,219 @@
+# Bit manipulation
+
+1)  operators
+    1) AND (&)
+        when you and with any number digits remain same
+    2) OR (||)
+    3) XOR (^)
+        a^1 = ~a
+        a^a = 0
+        a^0 = a
+
+2)  convert decimal to binary
+
+    divide by 2 until no becomes 0 or 1 and then display the remainder of each division in reverse order
+
+    2   17  1
+    2   8   0       -> put reverse  10001
+    2   4   0
+    2   2   0
+    2   1   1
+
+
+3) convert binary to decimal
+
+    multiply the base with power ascending start from last digit
+
+    1010
+
+    = 0 x 2^0 + 1 x 2^1 + 0 x 2^2 + 1 x 2^3
+    = 0 + 2 + 0 + 8
+    = 10
+
+
+4) left shift operator (<<)
+
+    1010 << 1 --> 10100
+    a<<b = ax2^b
+
+
+5) right shift operator (>>)
+
+    11001 >> 1  --> 1100
+    a >> b = a/2^b
+
+
+6) Even or odd
+
+    last digit add 1 to the value i.e 1 x 2^0 so that decides
+
+    no & 1 == 1  -> odd
+    no & 1 == 0 -> even
+
+7) non duplicate array
+
+    we know a^a = 0
+    so in for loop XOR all the elements and add them so at all duplicates led to 0 and non-duplicate will remain original
+
+8) Find ith bit of no
+
+    so create mask as we know any no & 1 gives same no
+
+    Q. find 4th bit
+    create a mask 1<<(n-1) --> if 4 -->   1000 so add 3 zeros at end now perform & with no
+    ans -> no & (1<<(n-1))
+
+9) Set ith bit
+
+    turn bit to 1
+    0 -> 1 and 1 -> 1
+
+    Q set 4th bit
+    create mask  1<<(n-1) --> if 4 -->   1000 so add 3 zeros at end now perform || with no
+    ans -> no || (1<<(n-1))
+
+10) Reset ith bit
+
+    turn bit 1 -> 0 and 0 -> 0
+
+    Q. reset 4th bit
+    create mask  1<<(n-1) --> if 4 -->   1000 so add 3 zeros at end now perform & with negation of no
+    ans -> no & !(1<<(n-1))
+
+11) Find position of right most set bit
+
+    101101100 -> answer is 3
+    First take complement of no and perform & operation between no and ~no
+
+        int num = 18;
+        static int findRightmostSetBitPosition(int num) {
+            int negNum = -num; // Calculate the two's complement of the number
+            int rightmostSetBit = num & negNum; // Perform bitwise AND
+            int position = 0;
+            while (rightmostSetBit > 0) {
+                rightmostSetBit >>= 1; // Right shift to check each bit
+                position++;
+            }
+            return position;
+        }
+
+
+12) Range
+
+    Btw we can store 8 bits in 1 byte
+    - so total numbers possible -> 2^8 = 256
+    - we use 1st bit to define number is positive or negative
+    - so now total numbers 2^7 = 128
+    - range is -128 to 127
+    - formula to find range for n bits -> -2^(n-1) to 2^(n-1)-1
+
+13) Triplet
+
+14) Find magic no
+
+        5^3 5^2 5^1
+    1 -> 0  0   1   -> 5
+    2 -> 0  1   0   -> 25
+    3 -> 0  1   1   -> 30
+
+            int n = 6;
+            int base = 5;
+            int ans = 0;
+
+            while(n>0){
+                // last bit
+                int last = n&1;
+                // remove last bit
+                n = n>>1;
+                // ans -> multiply last bit to base if 1 then its get added
+                ans += last * base;
+                // start from 5 -> 25 -> 125
+                base = base*5;
+            }
+
+15) Find no of digits in any base
+
+        int number = 345;
+        int base = 10;
+        // answer
+        int len = (int)(Math.log(number)/Math.log(base)) + 1;
+
+16) Pascal triangle
+
+    sum of any nth row of pascal triangle = 2^(n-1) = 1 << (n-1)
+
+
+17) Find the number is power of 2
+
+    do right shift and check count of 1 in bits
+    - only one 1 bit should be there
+    OR
+    check no&(no-1) = 0 handle for 0 as it also gives true for 0
+    as 1000 = 111 + 1 so
+    1000 + 111 = 1111 & 1000 -> 1
+
+
+18) Find the base^power
+
+        int base = 2;
+        int ans = 1;
+        int power = 6;
+
+        while(power>0){
+            // last bit of number
+            int lastdigit = power&1;
+            // if set bit then multiply answer with base
+            if(lastdigit == 1) {
+                ans *= base;
+            }
+            // remove last bit
+            power>>=1;
+            // increase base in it
+            base *=base;
+        }
+
+
+19) Find no of set bits
+
+        int count = 0;
+        while(n>0){
+
+            // one way is to set counter and right shift
+            if((n&1)==1){
+            count++;
+               }
+            n>>=1;
+
+            // second is to calculate RSB and minus from original no
+            1010 -> 10 -> 1000 -> count 1
+            1000 -> 1000 -> 0000 -> count 2
+            n = n-(n&-n);
+            count++;
+
+            // or and with n-1 so
+            1010 & 1000 -> 1000 -> count 1
+            1000 & 111 -> 0000 -> count 2
+            n = n & (n-1);
+            count++;
+        }
+
+20) To see integer to binary string
+
+        Integer.toBinaryString(a);
+
+
+21) To find XOR 0->a
+
+    if a%4 == 0 then ans -> a
+    if a%4 == 1 then ans -> 1
+    if a%4 == 2 then ans -> a + 1
+    if a%4 == 3 then ans -> 0
+
+
+22) To find XOR in range a and b
+
+    ans = b^(a-1)
+
+    ex -> a = 3 and b = 9
+    b = 0-9 and a-1 = 0-2
+    so b^(a-1) = 3-9

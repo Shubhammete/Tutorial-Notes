@@ -1,69 +1,121 @@
-- To pull images from the docker hub 
-	docker pull busybox
+### Docker images
 
-- To run the container
-	docker run -it node
+	- To pull images from the docker hub 
+		docker pull busybox
 
-- To see the images 
-	docker images
-	
-- To delete the image
-	 docker image rm 3f57d9401f8d
-	 docker image rm (id)
+	- To see the images 
+		docker image ls
 
-- To inspect docker image
-	docker inspect 3f57d9401f8d
+	- To delete the image
+	 	docker image rm 3f57d9401f8d
+	 	docker image rm (id)
 
-- To remove used images
-	docker image prune 
+	- To inspect the docker image
+		docker inspect 3f57d9401f8d
 
--  This will remove all images without at least one container associated to them.
-	docker image prune -a
+	- To remove unused images
+		docker image prune 
 
-- Docker container
-	docker container -ls // to see all running containers
-	docker ps
-	docker container ls --all // to see all available containers
+	-  This will remove all images without at least one container associated with them.
+		docker image prune -a
+
+### To build and run the image
+
+	- To run image 
+		docker run -it my_apache_image
+
+	- To run the docker image on a specific port
+		docker run -it -p 8080:8080 node_app
+
+	- To run the docker image on a specific port
+		docker run -it -p 8080:3000 node_app
+	// here 8080 is the port on your machine i.e localhost and 3000 on a container i.e. given in code for node application const port = 3000 in code
+
+	- To build a custom image create a Dockerfile and then add a base image and run the command
+		docker build -t myfirstimg .
+	// here name must be lowercase and at last . represent the present directory -t is a tag
+
+	- To run the code on the server of the port that we expose in Dockerfile
+		docker run -it -P node_app
+
+	// to push image to docker hub we need to tag the image with the repository name or we can directly name the 	   repository name to image name
+		docker tag node-app shubhmete23/node-app
+
+	// then push the image to docker hub
+		docker push shubhmete23/node-app
+
+
+
+### container
+
+	- To run the container
+		docker run -it node (docker run -it image-name)
+
+	- To see all running containers
+		docker container -ls 
+		docker ps
+		docker container ls --all // to see all available containers
 	
 
 	CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS                      PORTS     NAMES
 	f550e72d3b9f   busybox   "sh"          4 seconds ago    Exited (0) 2 seconds ago              crazy_roentgen
 	1080b22ff90f   ubuntu    "/bin/bash"   14 seconds ago   Exited (0) 12 seconds ago             zen_galois
 
-	// here random names are given by docker we can also create our custom named container
+	//Here random names are given by docker we can also create our custom-named container
+	// it directly starts ubuntu command line as I here is interactive and t here is tty i.e. it attaches current terminal to container environment
+		docker run -it --name shubham ubuntu 
+
+	// it just creates the container
+		- docker run --name shubham ubuntu 
 	
-	docker run -it --name shubham ubuntu // it directly starts ubuntu command line as i here is interactive and t here is tty i.e. it attaches current terminal to container environment
-	docker run --name shubham ubuntu // it just creates the container
+	- To remove docker container
+		docker container rm shubham
 	
-- To remove docker container
-	docker container rm shubham
+	- To delete all exited container
+		docker container prune
+
+	- To execute the operations in a container from another terminal or outside the environment 
+		docker exec shubham mkdir newDir
+
+	- To start the exited container 
+		docker start shubham
+
+	- To exit the container
+		docker kill shubham
+
+	- To attach terminal to environment  i.e. opens ubuntu terminal in my terminal if shubham is container of 	ubuntu image
+		docker attach shubham
+
+	- To run commands on image
+		docker run -it myfirstimg bash // opens bash
+		docker run -it myfirstimg whoami etc..
+
+	- To show logs of a container
+		docker container logs (id)
+
 	
-- To delete all exited container
-	docker container prune
+# Dockerfile
 
-- To execute the operations in container from another terminal or outside the environment 
-	docker exec shubham mkdir newDir
+	# base image
+		FROM ubuntu:latest
+	# command to execute -> here install apache server
+		RUN apt-get update && apt-get install -y apache2
+	# copy index.html to /var/www/html/ directory
+		COPY index.html /var/www/html/
+	# Run apache server on runing image
+		CMD ["apache2ctl", "-D", "FOREGROUND"]
 
-- To start the exited container 
-	docker start shubham
+	# all commands below this will run in /home/app/ directory
+	WORKDIR /home/app/
+	RUN npm install
 
-- To exit the container
-	docker kill shubham
+	# WORKDIR /root --> to run commands in main directory
+	
+	# we can expose the port so can we not need to map it on CLI
 
-- To attach terminal to environment  i.e. opens ubuntu terminal in my terminal if shubham is container of ubuntu image
-	docker attach shubham
+	# EXPOSE 3000 8000 3001 we can expose as many ports we need
+	# EXPOSE 3000-3999 we can expose the port in the range also
 
-- To run commands on image
-	docker run -it myfirstimg bash // opens bash
-	docker run -it myfirstimg whoami etc..
+	# make sure the the port is same as given in code
+	EXPOSE 8080 
 
-- To show logs of container
-	docker container logs (id)
-
-- To build custom image create Dockerfile and then add base image and run command
-	docker build -t myfirstimg .
-	// here name must be lowercase and at last . represnt the present directory -t is tag
-
-
-- TO run server image on port
-	docker run -p 80:80 my_apache_image

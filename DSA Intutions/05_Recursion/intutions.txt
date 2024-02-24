@@ -1,0 +1,233 @@
+# Recursion
+
+### Simple recursion
+
+- Write expression break into simpler form
+- Draw the recursion tree
+
+    - no%10 = no to check the last digit to return
+
+    - creating list in body
+            - each time new list gets created
+            - so create new list to store the answers and all the list created at each call merge in that list
+
+
+
+        triangle(4,0);
+# Patterns
+
+    - Take no of rows and print cols accordingly
+    - reduce the no of rows up to 0 and increase cols and when row == 0 stop
+
+
+# Sorting
+
+    1) Bubble sort
+        - use pattern technique
+        - take row as no of elements and col as iterator on it
+        - swap accordingly and increase col no up to col < row
+        - then after iteration reduce the row i.e. array size by 1 as last element is sorted
+
+
+    2) Selection sort
+        - same use pattern technique
+        - take max elem in argument
+        - same iterate over the array using col pointer and find the max in the array
+        - after iteration is over swap the max with last index and reduce the rows i.e. array size by 1
+
+
+    3) Quick sort
+
+        - take low and high as endpoints i.e. 0 and arr,length
+        - return when low is greater or equal to high
+        - assign low and high to start and end with mid calculated by them and take middle element as pivot
+        - run while loop until start<=end and if pivot is greater than starting element just increment start
+        - if pivot is smaller than end elements then just decrement end
+        - if both conditions break just swap the start and end element so pivot is at correct place
+        - make two recursion calls
+            sort(arr,low,end);  // end will be mid - 1  i.e. low == 0 and end == no before pivot
+            sort(arr,start,high);  // start will be mid + 1 i.e. start == no after pivot and high == arr.length
+
+
+    4) Merge sort
+
+        - divide array into half by creating a copy of array from 0 to mid and mid to arr.len
+        - sort the left part of array and right part of array until arr.len == 1
+        - then merge both arrays by creating new array of size left+ right
+        - take three pointers for left, right, and mix
+        - check smaller element from left or right and add them to mix
+        - then check for remaining elements in uneven size array
+        - then return array
+
+
+        Inplace merge sort
+
+
+        public class InplaceMergeSort {
+            public static void main(String[] args) {
+                int[] arr =new int[]{23,55,7,5,2};
+                // passed array.length
+                sort(arr,0,arr.length);
+                System.out.println(Arrays.toString(arr));
+            }
+
+            static void sort(int[] arr, int start, int end){
+                if(end-start == 1){
+                    return;
+                }
+                int mid = start + (end-start)/2;
+                // here we are passing mid as we ignore last element as we passed arr.length
+                sort(arr,start,mid);
+                sort(arr,mid,end);
+
+                 merge(arr,start,mid,end);
+            }
+
+            static void merge(int[] arr, int start, int mid, int end){
+                // new array of size of left + right
+                int[] mix = new int[end-start];
+                // pointers for original array
+                int i = start;
+                int j = mid;
+                // pointer for mix
+                int k = 0;
+
+                while(i<mid && j<end){
+                    if(arr[i]<arr[j]){
+                        mix[k] = arr[i];
+                        i++;
+                    }else{
+                        mix[k] = arr[j];
+                        j++;
+                    }
+                    k++;
+                }
+
+                while (i<mid){
+                    mix[k] = arr[i];
+                    i++;
+                    k++;
+                }
+
+                while(j<end){
+                    mix[k] = arr[j];
+                    j++;
+                    k++;
+                }
+
+                for(int l = 0;l<mix.length;l++){
+                    arr[start+l] = mix[l];
+                }
+            }
+        }
+
+
+############### Strings
+
+16) Skip letter from string
+
+    1)
+        private static String sameString(String up) {
+                if(up.isEmpty()){
+                    return "";
+                }
+                char ele = up.charAt(0);
+
+                if(ele == 'a'){
+                    return sameString(up.substring(1));
+                }else{
+                    return ele + sameString(up.substring(1));
+                }
+            }
+
+    2)
+        static String ans = "";
+        private static void Removea(String in, int index) {
+            if(index == in.length()){
+                return;
+            }
+            if(in.charAt(index)=='a'){
+                Removea(in,++index);
+            }else{
+                ans +=in.charAt(index);
+                Removea(in,++index);
+            }
+        }
+
+    3)
+            skip("","aiefaaerkea")
+            static void skip(String p, String up){
+                if(up.isEmpty()){
+                    System.out.println(p);
+                    return;
+                }
+
+                char ele = up.charAt(0);
+
+                if(ele == 'a'){
+                    skip(p,up.substring(1));
+                }else{
+                    skip(p+ele,up.substring(1));
+                }
+            }
+
+17) skip word from string
+
+    private static String sameString(String up) {
+            if(up.isEmpty()){
+                return "";
+            }
+
+
+            if(up.startsWith("apple")){
+                return sameString(up.substring(5));
+            }else{
+                return up.charAt(0) + sameString(up.substring(1));
+            }
+        }
+
+    # only specific word
+
+        static String fxn(String p){
+            if(p.isEmpty()){
+                return "";
+            }
+            if(p.startsWith("app") && !p.startsWith("apple")){
+                return  fxn(p.substring(3));
+            }else{
+                return p.charAt(0)+fxn(p.substring(1));
+            }
+
+        }
+
+## Subsets and subsequence
+
+    subset("","abc")
+    static void subset(String p, String up){
+            if(up.isEmpty()){
+                System.out.println(p);
+                return;
+            }
+            // here we have to either take or leave the element so in one call add the element to empty string
+            // and in second call ignore it i.e. keep it empty
+            subset(p+up.charAt(0),up.substring(1));
+            subset(p,up.substring(1));
+        }
+
+        static ArrayList<String> sub(String p, String up){
+
+            if(up.isEmpty()){
+                // create the new list each time
+                ArrayList<String> list = new ArrayList<>();
+                list.add(p);
+                return list;
+            }
+
+            // add each calls in arraylist
+            ArrayList<String> left = sub(p+up.charAt(0),up.substring(1));
+            ArrayList<String> right = sub(p,up.substring(1));
+
+            // finally merge the arraylists into one
+            left.addAll(right);
+            return left;
+        }

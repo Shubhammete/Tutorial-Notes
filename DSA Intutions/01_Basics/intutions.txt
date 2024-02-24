@@ -10,32 +10,18 @@
                System.out.println("Other Fruit");
            }
 
-2) Occurrence
+2) Conditions
 
-    // check how many times number has occurred
-    while(num>0)
-    {
-         if(num%10 == no) {  // num%10 gives last no
-               count++;
-            }
+         num%10 == no     // num%10 gives last no
          num = num/10;   // num/10 removes last no
-         length--;   // remove in case of num>0
-    }
+
 
 3) Prime no
 
-    static String checkPrime(int no){
+            // start from 2 as 1 and 0 are not prime nor composite
             int c = 2;
-            // check up to square root
-            while(c*c <= no){
-                if(no%c == 0){
-                    return "Not Prime";
-
-                }
-                c++;
-            }
-            return "Prime";
-        }
+            // check up to square root of no
+            while(c*c <= no)
 
 4) Reverse Number
 
@@ -50,53 +36,25 @@
 5) ArmStrong Number
 
     // Number whose sum of cube of each digit is equal to original number
-    static boolean checkArmstrongNo(int no) {
-            int sum = 0;
-            int original = no;
-            while(no>0){
-                int rem = no%10;
-                int cube = rem*rem*rem;
-                sum += cube;
-                no /= 10;
-            }
-            if (sum == original){
-                return true;
-            }
-            return false;
-        }
 
 6) Fibonacci Number
 
     // Series that is sum of first no and second no
+        fib(n) = fib(n-1)+fib(n-2)
 
-    int first =0;
-    int second = 1;
-    int result = 0;
-    for(int i = 2; i<=n;i++){
-        result= first + second;
-        first = second;
-        second = result;
-    }
-
-7) Factorial
-
-    if(num != 0 ){
-    for(int i = num; i>=1; i--){
-            ans *= i;
-        }
-        return ans;
-    }
-
+    // formulas
+    1) (1+sqrt(5)/2)^n / sqrt(sqrt(5))
+    (long)(Math.pow((1+Math.sqrt(5))/2,n)/Math.sqrt(5));
+    (long)((Math.pow((1+Math.sqrt(5))/2,n)-Math.pow((1-Math.sqrt(5))/2,n))/Math.sqrt(5));
 
 8) Permutation and Combination
 
-    static int nPr(int n,int r){
-        return (fact(n)/fact(n-r));
-        // n!/ (n-r)!
-    }
+    Permutation nPr = n!/ (n-r)!
 
-    static int nCr(int n, int r) {
-        return (fact(n)/(fact(r)*fact(n-r)));
-        // n! / r! * (n-r)!
-    }
+    Combination nCr = n! / r! * (n-r)!
+
+
+9) To find no of digits
+    (int)Math.log10(no)+1)
+
 

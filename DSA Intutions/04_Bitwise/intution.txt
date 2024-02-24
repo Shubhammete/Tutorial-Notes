@@ -83,19 +83,18 @@
 11) Find position of right most set bit
 
     101101100 -> answer is 3
-    First take complement of no and perform & operation between no and ~no
-
-        int num = 18;
-        static int findRightmostSetBitPosition(int num) {
-            int negNum = -num; // Calculate the two's complement of the number
+    - First take complement of no and perform & operation between no and ~no
+        int negNum = -num
+    - Perform bitwise and
             int rightmostSetBit = num & negNum; // Perform bitwise AND
+    - in while loop right shift up to which rightmost will become 0
             int position = 0;
             while (rightmostSetBit > 0) {
                 rightmostSetBit >>= 1; // Right shift to check each bit
                 position++;
-            }
+    - then return the position
             return position;
-        }
+
 
 
 12) Range
@@ -116,25 +115,19 @@
     2 -> 0  1   0   -> 25
     3 -> 0  1   1   -> 30
 
-            int n = 6;
-            int base = 5;
-            int ans = 0;
-
-            while(n>0){
-                // last bit
-                int last = n&1;
-                // remove last bit
-                n = n>>1;
-                // ans -> multiply last bit to base if 1 then its get added
+    - take no and base
+    - in while loop iterate until no is zero
+    - take last bit and remove it
+        int last = n&1;
+        n = n>>1;
+    - ans -> multiply last bit to base if 1 then its get added
                 ans += last * base;
-                // start from 5 -> 25 -> 125
+    - increment the base at each iteration
                 base = base*5;
             }
 
 15) Find no of digits in any base
 
-        int number = 345;
-        int base = 10;
         // answer
         int len = (int)(Math.log(number)/Math.log(base)) + 1;
 
@@ -145,52 +138,32 @@
 
 17) Find the number is power of 2
 
-    do right shift and check count of 1 in bits
+    - do right shift and check count of 1 in bits
     - only one 1 bit should be there
     OR
-    check no&(no-1) = 0 handle for 0 as it also gives true for 0
-    as 1000 = 111 + 1 so
-    1000 + 111 = 1111 & 1000 -> 1
+    - check no&(no-1) = 0 handle for 0 as it also gives true for 0
+    as 1000 - 1 = 111  so 1000 & 0111 = 0
 
 
 18) Find the base^power
 
-        int base = 2;
-        int ans = 1;
-        int power = 6;
-
-        while(power>0){
-            // last bit of number
-            int lastdigit = power&1;
-            // if set bit then multiply answer with base
-            if(lastdigit == 1) {
-                ans *= base;
-            }
-            // remove last bit
-            power>>=1;
-            // increase base in it
-            base *=base;
-        }
-
+    - take base, power and ans
+    - while power is zero
+        - take last bit of power if 1 then multiply base to answer and increase base and remove last bit
+        - if 0 then just increase base and remove last bit
 
 19) Find no of set bits
 
-        int count = 0;
-        while(n>0){
-
-            // one way is to set counter and right shift
-            if((n&1)==1){
-            count++;
-               }
-            n>>=1;
-
-            // second is to calculate RSB and minus from original no
+    - all in while loop no>0
+       - set the counter in while loop
+       OR
+       - second is to calculate RSB and minus from original no in while loop
             1010 -> 10 -> 1000 -> count 1
             1000 -> 1000 -> 0000 -> count 2
             n = n-(n&-n);
             count++;
-
-            // or and with n-1 so
+        OR
+       - or and with n-1 so
             1010 & 1000 -> 1000 -> count 1
             1000 & 111 -> 0000 -> count 2
             n = n & (n-1);
